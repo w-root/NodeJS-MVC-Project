@@ -10,3 +10,8 @@ exports.getAboutPage = (req, res) => {
     })
 }
 
+exports.getRegisterPage = (req, res) => {
+    res.render('register', {
+        page_name: "register"
+    })
+}
