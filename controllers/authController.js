@@ -18,9 +18,7 @@ exports.createUser = async (req, res) => {
 
 exports.loginUser = async (req, res) => {
     const {email,password} = req.body
-
     const user = await User.findOne({email})
-
     try {
         if (user) {
             bcrypt.compare(password, user.password, (error, same) => {
@@ -35,13 +33,22 @@ exports.loginUser = async (req, res) => {
     } catch {
         res.status(400).json({
             status: 'error',
-            error
+            
         })
     }
 }
 
 exports.logout = async (req, res) => {
-   req.session.destroy( () =>{
+   req.session.destroy( () => {
     res.redirect('/login')
    })
+}
+
+exports.getDashboardPage = async (req, res) => {
+    const user = await User.findOne({_id:req.session.userId})
+
+    res.render('dashboard', {
+        page_name: "dashboard",
+        user
+    })
 }
