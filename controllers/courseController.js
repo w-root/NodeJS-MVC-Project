@@ -14,7 +14,7 @@ exports.createCourse = async (req, res) => {
     req.flash("success", `Kurs başarıyla eklendi.`);
     res.status(201).redirect('/courses');
   } catch (error) {
-    req.flash("error", `Something happened!`);
+    req.flash("error", `Kurs Eklenemedi!`);
     res.status(400).redirect('/courses');
   }
 };
