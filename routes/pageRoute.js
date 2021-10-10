@@ -1,17 +1,16 @@
 const express = require('express')
-const router = express.Router()
+const pageController = require('../controllers/pageController');
+const redirectMiddleware = require('../middlewares/redirectMiddleware');
 
-const pageController = require('../controllers/pageController')
+const router = express.Router();
 
-const redirectMiddleware = require('../middlewares/redirectMiddleware')
+router.get('/',pageController.getIndexPage);
+router.get('/about',pageController.getAboutPage);
+router.get('/register',redirectMiddleware, pageController.getRegisterPage);
+router.get('/login',redirectMiddleware, pageController.getLoginPage);
+router.get('/contact',pageController.getContactPage);
 
-router.get('/', pageController.getIndexPage)
-router.get('/about', pageController.getAboutPage)
+router.post('/contact',pageController.sendEmail);
 
-router.get('/register',redirectMiddleware, pageController.getRegisterPage)
-router.get('/login', redirectMiddleware,pageController.getLoginPage)
+module.exports = router;
 
-
-
-
-module.exports = router

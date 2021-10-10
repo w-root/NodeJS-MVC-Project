@@ -1,8 +1,7 @@
-const user = require('../models/User')
+const User = require('../models/User');
 
-module.exports = (req,res,next) =>{
-    if(!req.session.userId){
-        res.redirect('/login')
-    }
-    next()
-}
+module.exports = (req, res, next) => {
+  if(!req.session.userID){
+    res.redirect('/login');
+  }
+ };
