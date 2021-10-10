@@ -8,19 +8,19 @@ const router = express.Router();
 
 router.post('/signup',
     [
-        body('name').not().isEmpty().withMessage('Please Enter Your Name'),
+        body('name').not().isEmpty().withMessage('İsminizi Giriniz'),
 
 
-        body('email').isEmail().withMessage('Please Enter Valid Email')
+        body('email').isEmail().withMessage('Uygun bir email giriniz!')
         .custom((userEmail)=> {
             return User.findOne({email:userEmail}).then(user => {
                 if (user) {
-                    return Promise.reject('Email is already exists!')
+                    return Promise.reject('Email Kullanımda !')
                 }
             })
         }),
 
-        body('password').not().isEmpty().withMessage('Please Enter A Password'),
+        body('password').not().isEmpty().withMessage('Şifrenizi Giriniz !'),
     ],
     
     authController.createUser);
